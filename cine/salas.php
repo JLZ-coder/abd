@@ -4,8 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="includes/estilo.css" />
-	<meta http-equiv=Content-Type content=text/html charset=UTF-8 />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Cines Coronado</title>
 </head>
 
