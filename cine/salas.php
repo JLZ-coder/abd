@@ -5,13 +5,13 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="includes/estilo.css" />
-	<meta http-equiv=Ã¢â‚¬ï¿½Content-TypeÃ¢â‚¬ï¿½ content=Ã¢â‚¬ï¿½text/html; charset=UTF-8Ã¢â‚¬Â³ />
-	<title>Cines "nombre original"</title>
+	<meta http-equiv=Content-Type content=text/html charset=UTF-8 />
+	<title>Cines Coronado</title>
 </head>
 
 <body>
 
-	<h1 align="center">Cines "Nombre original"</h1>
+	<h1 align="center">Cines Coronado</h1>
 	
 	<a href="index.php"> ⇐Atras </a>
 	

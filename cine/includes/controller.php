@@ -1,10 +1,10 @@
 <?php
 
 require_once(__DIR__ . '/DAOs/salaDAO.php');
-/*require_once(__DIR__ . '/DAOs/asientoDAO.php');
-require_once(__DIR__ . '/DAOs/peliculaDAO.php');
+//require_once(__DIR__ . '/DAOs/asientoDAO.php');
+//require_once(__DIR__ . '/DAOs/peliculaDAO.php');
 require_once(__DIR__ . '/DAOs/registroDAO.php');
-require_once(__DIR__ . '/DAOs/sesionDAO.php');*/
+//require_once(__DIR__ . '/DAOs/sesionDAO.php');
 
 class controller{
 
@@ -18,10 +18,10 @@ class controller{
 
     public function __construct(){
         $this->salaDAO = new salaDAO();
-        /*$this->asientoDAO = new asientoDAO();
-        $this->peliculaDAO = new peliculaDAO();
+        //$this->asientoDAO = new asientoDAO();
+        //$this->peliculaDAO = new peliculaDAO();
         $this->registroDAO = new registroDAO();
-        $this->sesionDAO = new sesionDAO();*/
+        //$this->sesionDAO = new sesionDAO();
     }
     
     /* 
@@ -40,6 +40,9 @@ class controller{
 
         return self::$instance;
     }
+    
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // FUNCIONES SALA
     
     public function selectSala($col = "", $cond = ""){
         return $this->salaDAO->select($col, $cond);
@@ -62,5 +65,21 @@ class controller{
         return $this->salaDAO->delete($cond);
     }
     
+    // FIN FUNCIONES SALA
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // FUNCIONES REGISTRO
+    
+    public function selectRegistro()
+    {
+        return $this->registroDAO->select();
+    }
+    
+    
+    
+    
+    // FIN FUNCIONES REGISTRO
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 }
 
