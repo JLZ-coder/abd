@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-04-2020 a las 20:04:47
+-- Tiempo de generación: 19-04-2020 a las 15:05:23
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.3
 
@@ -30,15 +30,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `asientos` (
   `id` int(11) NOT NULL,
-  `id_sala` int(11) NOT NULL
+  `id_sala` int(11) NOT NULL,
+  `fecha_sesion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `asientos`
 --
 
-INSERT INTO `asientos` (`id`, `id_sala`) VALUES
-(1, 1);
+INSERT INTO `asientos` (`id`, `id_sala`, `fecha_sesion`) VALUES
+(1, 1, '2020-04-19 20:00:00');
 
 -- --------------------------------------------------------
 
@@ -131,8 +132,9 @@ INSERT INTO `sesion` (`fecha`, `id_sala`, `id_peli`, `precio`) VALUES
 -- Indices de la tabla `asientos`
 --
 ALTER TABLE `asientos`
-  ADD PRIMARY KEY (`id_sala`,`id`) USING BTREE,
-  ADD KEY `id` (`id`);
+  ADD PRIMARY KEY (`id_sala`,`id`,`fecha_sesion`) USING BTREE,
+  ADD KEY `id` (`id`),
+  ADD KEY `fecha_sesion` (`fecha_sesion`);
 
 --
 -- Indices de la tabla `pelicula`
@@ -187,15 +189,15 @@ ALTER TABLE `registro`
 -- Filtros para la tabla `asientos`
 --
 ALTER TABLE `asientos`
-  ADD CONSTRAINT `asientos_ibfk_1` FOREIGN KEY (`id_sala`) REFERENCES `sala` (`id`);
+  ADD CONSTRAINT `asientos_ibfk_1` FOREIGN KEY (`fecha_sesion`) REFERENCES `sesion` (`fecha`);
 
 --
 -- Filtros para la tabla `registro`
 --
 ALTER TABLE `registro`
-  ADD CONSTRAINT `registro_ibfk_1` FOREIGN KEY (`sesion`) REFERENCES `sesion` (`fecha`),
   ADD CONSTRAINT `registro_ibfk_2` FOREIGN KEY (`id_sala`) REFERENCES `asientos` (`id_sala`),
-  ADD CONSTRAINT `registro_ibfk_3` FOREIGN KEY (`asiento`) REFERENCES `asientos` (`id`);
+  ADD CONSTRAINT `registro_ibfk_3` FOREIGN KEY (`asiento`) REFERENCES `asientos` (`id`),
+  ADD CONSTRAINT `registro_ibfk_4` FOREIGN KEY (`sesion`) REFERENCES `asientos` (`fecha_sesion`);
 
 --
 -- Filtros para la tabla `sesion`
