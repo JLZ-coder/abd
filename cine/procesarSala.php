@@ -2,7 +2,7 @@
 
 require_once 'includes/config.php';
 
-echo '<a href="index.php"> ⇐Atras </a>';
+echo '<a href="salas.php"> ⇐Atras </a>';
 
 if (isset($_POST['procesar'])) {
     $arr = $ctrl->selectSala();

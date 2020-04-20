@@ -1,7 +1,7 @@
 <?php
 
 require_once(__DIR__ . '/DAOs/salaDAO.php');
-//require_once(__DIR__ . '/DAOs/asientoDAO.php');
+require_once(__DIR__ . '/DAOs/asientoDAO.php');
 require_once(__DIR__ . '/DAOs/peliculaDAO.php');
 require_once(__DIR__ . '/DAOs/registroDAO.php');
 require_once(__DIR__ . '/DAOs/sesionesDAO.php');
@@ -18,7 +18,7 @@ class controller{
 
     public function __construct(){
         $this->salaDAO = new salaDAO();
-        //$this->asientoDAO = new asientoDAO();
+        $this->asientoDAO = new asientoDAO();
         $this->peliculaDAO = new peliculaDAO();
         $this->registroDAO = new registroDAO();
         $this->sesionDAO = new sesionesDAO();
@@ -87,6 +87,30 @@ class controller{
     public function deleteSesion($fecha, $sala){
         $cond = "fecha="."'".$fecha."'" . " AND " . "id_sala=" . $sala;
         return $this->sesionDAO->delete($cond);
+    }
+    
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // FUNCIONES ASIENTO
+    
+    public function selectAsiento($col = "", $cond = ""){
+        return $this->asientoDAO->select($col, $cond);
+    }
+    
+    public function insertAsiento($fecha, $sala, $asiento){
+        $col = "id, id_sala, fecha_sesion";
+        $values = $asiento . "," . $sala . "," .  "'". $fecha . "'";
+        return $this->asientoDAO->insert($col, $values);
+    }
+    
+    public function updateAsiento($fecha, $sala, $asiento_ant, $asiento_post){
+        $set = "id =".$asiento_ant . "," . "id_sala=" . $sala . "fecha_sesion=" . "'". $fecha . "'";
+        $cond = "id="."'".$asiento_post."'" . " AND " . "id_sala=" . $sala . " AND " . "fecha=" . "'". $fecha . "'";
+        return $this->asientoDAO->update($set, $cond);
+    }
+    
+    public function deleteAsiento($fecha, $sala, $asiento){
+        $cond = "id=".$asiento. " AND " . "id_sala=" . $sala . " AND " . "fecha_sesion=" . "'". $fecha . "'";
+        return $this->asientoDAO->delete($cond);
     }
 
 

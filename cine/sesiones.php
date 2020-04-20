@@ -25,7 +25,7 @@
 	<?php 
     
     echo '<ul>';
-    $arr = $ctrl->selectSesion('',"1 ORDER BY id_sala");
+    $arr = $ctrl->selectSesion('',"fecha > '".date("Y-m-d H:i:s", time())."' ORDER BY id_sala");
     
     if (count($arr) > 0) {
         $last_sala = $arr[0]['id_sala'];
@@ -68,7 +68,6 @@
     }
     
     echo '</table>';
-
     ?>
 	
 	<form action="procesarSesion.php" method="post">
@@ -90,7 +89,7 @@
             Pelicula:<br> 
             <select name="peli">
             	<?php 
-            	    $arr_peli = $ctrl->selectSala();
+            	    $arr_peli = $ctrl->selectPeliculas();
                 	foreach($arr_peli as $pair) {
                 	    $str = "value=".$pair['id'].">".$pair['id']."-".$pair['nombre'];
                 	    echo '<option '.$str.'</option>';
