@@ -16,10 +16,10 @@
 	<p>Parrafo introduciendonos</p>
 	<ul>
 		<li><a href= salas.php>Salas</a></li>
-		<li>Pelicula</li>
+		<li><a href= peliculas.php>Peliculas</a></li>
 		<li><a href= sesiones.php>Sesiones</a></li>
 		<li><a href= entradas.php>Entradas</a></li>
-		<li>Registros</li>
+		<li><a href= registros.php>Registros</a></li>
 	</ul>	
 
 		

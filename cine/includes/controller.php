@@ -1,9 +1,9 @@
 <?php
 
 require_once(__DIR__ . '/DAOs/salaDAO.php');
-/*require_once(__DIR__ . '/DAOs/asientoDAO.php');
+//require_once(__DIR__ . '/DAOs/asientoDAO.php');
 require_once(__DIR__ . '/DAOs/peliculaDAO.php');
-require_once(__DIR__ . '/DAOs/registroDAO.php');*/
+require_once(__DIR__ . '/DAOs/registroDAO.php');
 require_once(__DIR__ . '/DAOs/sesionesDAO.php');
 
 class controller{
@@ -19,8 +19,8 @@ class controller{
     public function __construct(){
         $this->salaDAO = new salaDAO();
         //$this->asientoDAO = new asientoDAO();
-        //$this->peliculaDAO = new peliculaDAO();
-        //$this->registroDAO = new registroDAO();
+        $this->peliculaDAO = new peliculaDAO();
+        $this->registroDAO = new registroDAO();
         $this->sesionDAO = new sesionesDAO();
     }
     
@@ -40,6 +40,9 @@ class controller{
 
         return self::$instance;
     }
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // FUNCIONES SALA
     
     public function selectSala($col = "", $cond = ""){
         return $this->salaDAO->select($col, $cond);
@@ -61,6 +64,9 @@ class controller{
         $cond = "id =".$id;
         return $this->salaDAO->delete($cond);
     }
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // FUNCIONES SESION
     
     public function selectSesion($col = "", $cond = ""){
         return $this->sesionDAO->select($col, $cond);
@@ -82,6 +88,38 @@ class controller{
         $cond = "fecha="."'".$fecha."'" . " AND " . "id_sala=" . $sala;
         return $this->sesionDAO->delete($cond);
     }
+
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // FUNCIONES REGISTRO
     
+    public function selectRegistros()
+    {
+        return $this->registroDAO->select();
+    }
+
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // FUNCIONES PELICULA
+
+    public function selectPeliculas()
+    {
+        return $this->peliculaDAO->select();
+    }
+    
+    public function insertPelicula($nombre, $descripcion)
+    {
+        return $this->peliculaDAO->insert($nombre, $descripcion);
+    }
+    
+    public function updatePelicula($id, $nombre, $descripcion)
+    {
+        return $this->peliculaDAO->update($id, $nombre, $descripcion);
+    }
+    
+    public function deletePelicula($id)
+    {
+        return $this->peliculaDAO->delete($id);
+    }
 }
 
