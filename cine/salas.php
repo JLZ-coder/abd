@@ -5,6 +5,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style>
+	table { border: 1px solid black;
+	        border-collapse: collapse;
+	        min-width: 250px; }
+    td { border: 1px solid black; }
+	</style>
 	<title>Cines Coronado</title>
 </head>
 
@@ -17,21 +23,20 @@
 	<h2>Salas</h2>
 
 	<?php 
-    echo '<ul>';
     $arr = $ctrl->selectSala();
-    foreach($arr as $pair) {
-        $str = "Sala: ".$pair['id']."-->Aforo: ".$pair['aforo'];
-        echo '<li>'.$str.'</li>';
+    
+    echo
+    '<table>
+     <tr> <th>ID</th> <th>Aforo</th> </tr>';
+    foreach ($arr as $valor)
+    {
+        echo
+        '<tr>
+	    <td>'.$valor['id'].'</td>
+	    <td>'.$valor['aforo'].'</td>
+	    </tr>';
     }
-    echo '</ul>'; 
-	
-    if (isset($_GET['errores']) && count($_GET['errores']) > 0) {
-        echo '<ul>';
-        foreach($_GET['errores'] as $error) {
-            echo '<li>'.$error.'</li>';
-        }
-        echo '</ul>';
-    }
+    echo '</table>';
 
     ?>
 	

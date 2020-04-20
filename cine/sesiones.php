@@ -5,6 +5,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style>
+	table { border: 1px solid black;
+	        border-collapse: collapse;
+	        min-width: 250px; }
+    td { border: 1px solid black; }
+	</style>
 	<title>Cines Coronado</title>
 </head>
 
@@ -26,29 +32,42 @@
     }
     $i = 0;
     $j = 0;
+    echo '<table>';
+    
     while ($i < count($arr)) {
-        echo '<h3>'."Sala ".$arr[$i]['id_sala'] . '</h3>';
-        echo '<ul>';
-        while ($j < count($arr) && $last_sala == $arr[$j]['id_sala']) {
-            $str = "Sesion: ".$arr[$j]['fecha']."-->Sala: ".$arr[$j]['id_sala']." -->Peli: ".$arr[$j]['id_peli']." -->Precio: ".$arr[$j]['precio'];
-            echo '<li>'.$str.'</li>';
-            $last_sala = $arr[$j]['id_sala'];
-            $j++;
-        }
-        if ($j < count($arr)) $last_sala = $arr[$j]['id_sala'];
-        echo '</ul>';
+        echo '<tr>';
+        
+    	    echo '<th>';
+                echo '<h3>'."Sala ".$arr[$i]['id_sala'] . '</h3>';
+            echo '</th>';
+    
+            echo '<td>';
+                echo
+                '<table>
+                <tr> <th>Fecha</th> <th>Pelicula</th> <th>Precio</th> </tr>';
+                while ($j < count($arr) && $last_sala == $arr[$j]['id_sala']) {
+             
+                    echo
+                    '<tr>
+            	    <td>'.$arr[$j]['fecha'].'</td>
+            	    <td>'.$arr[$j]['id_peli'].'</td>
+                    <td>'.$arr[$j]['precio'].'</td>
+            	    </tr>';
+                    
+                    $last_sala = $arr[$j]['id_sala'];
+                    $j++;
+                }
+                if ($j < count($arr)) $last_sala = $arr[$j]['id_sala'];
+                echo '</table>';
+                
+            echo '</td>';
+            
+        echo '</tr>';
         
         $i=$j;
     }
     
-	
-    if (isset($_GET['errores']) && count($_GET['errores']) > 0) {
-        echo '<ul>';
-        foreach($_GET['errores'] as $error) {
-            echo '<li>'.$error.'</li>';
-        }
-        echo '</ul>';
-    }
+    echo '</table>';
 
     ?>
 	
@@ -56,8 +75,8 @@
 		<fieldset>
 		<legend>Modificación de sesiones</legend>
             Fecha:<br> 
-            <input type="datetime-local" name="fecha"> <!--  value=<?php echo substr(date("c", time()), 0, 16);?>
-            min=<?php echo substr(date("c", time()), 0, 16);?>> --> <br>
+            <input type="datetime-local" name="fecha" value=<?php echo substr(date("c", time()), 0, 14)."00";?>
+            min=<?php echo substr(date("c", time()), 0, 16);?>><br>
             Sala:<br> 
             <select name="sala">
             	<?php 

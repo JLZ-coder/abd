@@ -2,6 +2,8 @@
 
 require_once 'includes/config.php';
 
+echo '<a href="sesiones.php"> ⇐Atras </a>';
+
 if (isset($_POST['procesar'])) {
     $arr = $ctrl->selectSesion();
     $str = "";
@@ -57,13 +59,18 @@ if (isset($_POST['procesar'])) {
             }
         }
     }
-    $str='';
-    if (isset($errores)) {
-        $str = "?".http_build_query(
-            array('errores' => $errores)
-            );
+    if (!isset($errores)) {
+        header("Location:sesiones.php".$str);
     }
-    
-    header("Location:sesiones.php".$str);
+    else {
+        echo '<h2>Problemas en el formulario</h2>';
+        if (isset($errores) && count($errores) > 0) {
+            echo '<ul>';
+            foreach($errores as $error) {
+                echo '<li>'.$error.'</li>';
+            }
+            echo '</ul>';
+        }
+    }
 }
 ?>

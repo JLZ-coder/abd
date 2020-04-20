@@ -2,6 +2,8 @@
 
 require_once 'includes/config.php';
 
+echo '<a href="index.php"> ⇐Atras </a>';
+
 if (isset($_POST['procesar'])) {
     $arr = $ctrl->selectSala();
     $str = "";
@@ -53,13 +55,18 @@ if (isset($_POST['procesar'])) {
         }
     }
     
-    $str='';
-    if (isset($errores)) {
-        $str = "?".http_build_query(
-            array('errores' => $errores)
-            );
+    if (!isset($errores)) {
+        header("Location:salas.php".$str);
     }
-   
-    header("Location:salas.php".$str);
+    else {
+        echo '<h2>Problemas en el formulario</h2>';
+        if (isset($errores) && count($errores) > 0) {
+            echo '<ul>';
+            foreach($errores as $error) {
+                echo '<li>'.$error.'</li>';
+            }
+            echo '</ul>';
+        }
+    }
 }
 ?>
