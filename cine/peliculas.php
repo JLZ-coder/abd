@@ -9,7 +9,7 @@
 	<style>
 	table { border: 1px solid black;
 	        border-collapse: collapse;
-	        width: 500px; }
+	        width: 700px; }
     td { border: 1px solid black; }
 	</style>
 </head>
@@ -45,8 +45,8 @@
 		<input type='text' name='id'></p>
 		<p>nombre:
 		<input type='text' name='nombre'></p>
-		<p>descripción:
-		<input type='text' name='descripcion'></p>
+		<p>descripción:</p>
+		<p><textarea name='descripcion' cols='40' rows='5'></textarea></p>
 		
 		<p>Opciones:
 		<p><input type='radio' name='op' value='insert' checked='checked'>Añadir pelicula</p>

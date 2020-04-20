@@ -109,23 +109,6 @@
         unset($errores);
     }
     
-    /*$nuevosDatos = $ctrl->selectPeliculas();
-    
-    echo '<p><table>
-              <tr> <td>id</td> <td>nombre</td> <td>descripcion</td> </tr>';
-    foreach ($nuevosDatos as $valor)
-    {
-        echo
-        "<tr>
-            <td>".$valor['id']."</td>
-            <td>".$valor['nombre']."</td>
-            <td>".$valor['descripcion']."</td>
-            </tr>";
-    }
-    echo '</table></p>';*/
-
-    //header('Location: peliculas.php');
-    //exit();
 ?>
 
 </body>

@@ -12,7 +12,7 @@
 
 	<h1 align="center">Cines Coronado</h1>
 	
-	<a href="index.php"> â‡�Atras </a>
+	<a href="index.php"> ⇐Atras</a>
 	
 	<h2>Salas</h2>
 
