@@ -17,92 +17,47 @@
 	<h2>Sesiones</h2>
 
 	<?php 
-	$arr = $ctrl->selectSesion();
-	$str = "";
-	$keys = array();
-	foreach($arr as $pair) {
-	    $keys[] = date("Y-m-d H:i",strtotime($pair['fecha'])).$pair['id_sala'];
-	}
-	
-	$_POST['peli'] = 1;
-	
-    if (isset($_POST['procesar'])) {
-        if (    
-            (!isset($_POST['fecha']) || trim($_POST['fecha']) == '')
-            
-            ) {
-                
-            $errores[] = "Campo fecha incorrecto";
-        }
-        if (
-            ($_POST['op'] == "insert" || $_POST['op'] == "update") && (!isset($_POST['precio']) || trim($_POST['precio']) == '')
-            ||
-            preg_match("/[^0-9.]/", $_POST['precio'])
-            ) {
-               
-            $errores[] = "Campo precio incorrecto";
-        }
-        
-        if (!isset($errores)) {
-            $_POST['fecha'] = date("Y-m-d H:i",strtotime($_POST['fecha']));
-            if ($_POST['op'] == "insert") {
-                if (!in_array ( $_POST['fecha'].$_POST['sala'], $keys )) {
-                    $_POST['fecha'] = date("Y-m-d H:i",strtotime($_POST['fecha']));
-                    $ctrl->insertSesion($_POST['fecha'], $_POST['sala'], $_POST['peli'], $_POST['precio']);
-                }
-                else {
-                    $errores[] = "Ya existe una sesion con esos parametros";
-                }
-            }
-            else if ($_POST['op'] == "update"){
-
-                if (in_array ( $_POST['fecha'].$_POST['sala'], $keys )) {
-                    $_POST['fecha'] = date("Y-m-d H:i",strtotime($_POST['fecha']));
-                    $ctrl->updateSesion($_POST['fecha'], $_POST['sala'], $_POST['peli'], $_POST['precio']);
-                }
-                else {
-                    $errores[] = "La sesion no existe";
-                }
-            }
-            else {
-                if (in_array ( $_POST['fecha'].$_POST['sala'], $keys  )) {
-                    $ctrl->deleteSesion($_POST['fecha'], $_POST['sala']);
-                }
-                else {
-                    $errores[] = "La sesion no existe";
-                }
-            }
-        }
-    }
     
     echo '<ul>';
-    $arr = $ctrl->selectSesion();
-    foreach($arr as $pair) {
-        $str = "Sesion: ".$pair['fecha']."-->Sala: ".$pair['id_sala']." -->Peli: ".$pair['id_peli']." -->Precio: ".$pair['precio'];
-        echo '<li>'.$str.'</li>';
-    }
-    echo '</ul>'; 
+    $arr = $ctrl->selectSesion('',"1 ORDER BY id_sala");
     
-    unset($_POST['submit']);
-	
-    if (isset($errores) && count($errores) > 0) {
+    if (count($arr) > 0) {
+        $last_sala = $arr[0]['id_sala'];
+    }
+    $i = 0;
+    $j = 0;
+    while ($i < count($arr)) {
+        echo '<h3>'."Sala ".$arr[$i]['id_sala'] . '</h3>';
         echo '<ul>';
-        foreach($errores as $error) {
+        while ($j < count($arr) && $last_sala == $arr[$j]['id_sala']) {
+            $str = "Sesion: ".$arr[$j]['fecha']."-->Sala: ".$arr[$j]['id_sala']." -->Peli: ".$arr[$j]['id_peli']." -->Precio: ".$arr[$j]['precio'];
+            echo '<li>'.$str.'</li>';
+            $last_sala = $arr[$j]['id_sala'];
+            $j++;
+        }
+        if ($j < count($arr)) $last_sala = $arr[$j]['id_sala'];
+        echo '</ul>';
+        
+        $i=$j;
+    }
+    
+	
+    if (isset($_GET['errores']) && count($_GET['errores']) > 0) {
+        echo '<ul>';
+        foreach($_GET['errores'] as $error) {
             echo '<li>'.$error.'</li>';
         }
         echo '</ul>';
     }
-    
-    unset($errores);
 
     ?>
 	
-	<form action="sesiones.php" method="post">
+	<form action="procesarSesion.php" method="post">
 		<fieldset>
 		<legend>Modificación de sesiones</legend>
             Fecha:<br> 
-            <input type="datetime-local" name="fecha" value=<?php echo substr(date("c", time()), 0, 16);?>
-            min=<?php echo substr(date("c", time()), 0, 16);?>><br>
+            <input type="datetime-local" name="fecha"> <!--  value=<?php echo substr(date("c", time()), 0, 16);?>
+            min=<?php echo substr(date("c", time()), 0, 16);?>> --> <br>
             Sala:<br> 
             <select name="sala">
             	<?php 
