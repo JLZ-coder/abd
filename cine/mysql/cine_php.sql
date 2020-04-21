@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-04-2020 a las 20:04:47
+-- Tiempo de generación: 21-04-2020 a las 20:42:30
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.3
 
@@ -30,15 +30,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `asientos` (
   `id` int(11) NOT NULL,
-  `id_sala` int(11) NOT NULL
+  `id_sala` int(11) NOT NULL,
+  `fecha_sesion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `asientos`
 --
 
-INSERT INTO `asientos` (`id`, `id_sala`) VALUES
-(1, 1);
+INSERT INTO `asientos` (`id`, `id_sala`, `fecha_sesion`) VALUES
+(0, 2, '2020-04-22 18:00:00'),
+(1, 2, '2020-04-22 18:00:00'),
+(99, 2, '2020-04-22 18:00:00'),
+(0, 3, '2020-04-21 20:00:00'),
+(1, 3, '2020-04-21 20:00:00'),
+(2, 3, '2020-04-21 20:00:00');
 
 -- --------------------------------------------------------
 
@@ -79,7 +85,12 @@ CREATE TABLE `registro` (
 --
 
 INSERT INTO `registro` (`id`, `sesion`, `id_sala`, `asiento`, `fecha`) VALUES
-(1, '2020-04-19 20:00:00', 1, 1, '2020-04-17 15:48:19');
+(2, '2020-04-21 20:00:00', 3, 0, '2020-04-21 16:58:47'),
+(3, '2020-04-21 20:00:00', 3, 1, '2020-04-21 16:58:47'),
+(4, '2020-04-21 20:00:00', 3, 2, '2020-04-21 16:58:47'),
+(5, '2020-04-22 18:00:00', 2, 0, '2020-04-21 17:00:12'),
+(6, '2020-04-22 18:00:00', 2, 1, '2020-04-21 17:00:12'),
+(7, '2020-04-22 18:00:00', 2, 99, '2020-04-21 17:00:13');
 
 -- --------------------------------------------------------
 
@@ -100,7 +111,8 @@ INSERT INTO `sala` (`id`, `aforo`) VALUES
 (1, 25),
 (2, 100),
 (3, 500),
-(4, 500);
+(4, 1),
+(5, 3);
 
 -- --------------------------------------------------------
 
@@ -120,8 +132,8 @@ CREATE TABLE `sesion` (
 --
 
 INSERT INTO `sesion` (`fecha`, `id_sala`, `id_peli`, `precio`) VALUES
-('2020-04-19 20:00:00', 1, 1, 12.5),
-('2020-04-19 20:00:00', 2, 1, 10);
+('2020-04-21 20:00:00', 3, 1, 7),
+('2020-04-22 18:00:00', 2, 1, 10);
 
 --
 -- Índices para tablas volcadas
@@ -131,8 +143,9 @@ INSERT INTO `sesion` (`fecha`, `id_sala`, `id_peli`, `precio`) VALUES
 -- Indices de la tabla `asientos`
 --
 ALTER TABLE `asientos`
-  ADD PRIMARY KEY (`id_sala`,`id`) USING BTREE,
-  ADD KEY `id` (`id`);
+  ADD PRIMARY KEY (`id_sala`,`id`,`fecha_sesion`) USING BTREE,
+  ADD KEY `id` (`id`),
+  ADD KEY `fecha_sesion` (`fecha_sesion`);
 
 --
 -- Indices de la tabla `pelicula`
@@ -177,7 +190,7 @@ ALTER TABLE `pelicula`
 -- AUTO_INCREMENT de la tabla `registro`
 --
 ALTER TABLE `registro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
@@ -187,15 +200,15 @@ ALTER TABLE `registro`
 -- Filtros para la tabla `asientos`
 --
 ALTER TABLE `asientos`
-  ADD CONSTRAINT `asientos_ibfk_1` FOREIGN KEY (`id_sala`) REFERENCES `sala` (`id`);
+  ADD CONSTRAINT `asientos_ibfk_1` FOREIGN KEY (`fecha_sesion`) REFERENCES `sesion` (`fecha`);
 
 --
 -- Filtros para la tabla `registro`
 --
 ALTER TABLE `registro`
-  ADD CONSTRAINT `registro_ibfk_1` FOREIGN KEY (`sesion`) REFERENCES `sesion` (`fecha`),
   ADD CONSTRAINT `registro_ibfk_2` FOREIGN KEY (`id_sala`) REFERENCES `asientos` (`id_sala`),
-  ADD CONSTRAINT `registro_ibfk_3` FOREIGN KEY (`asiento`) REFERENCES `asientos` (`id`);
+  ADD CONSTRAINT `registro_ibfk_3` FOREIGN KEY (`asiento`) REFERENCES `asientos` (`id`),
+  ADD CONSTRAINT `registro_ibfk_4` FOREIGN KEY (`sesion`) REFERENCES `asientos` (`fecha_sesion`);
 
 --
 -- Filtros para la tabla `sesion`
