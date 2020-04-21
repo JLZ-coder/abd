@@ -21,6 +21,14 @@
 	<a href="index.php"> ⇐Atras </a>
 	
 	<h2>Sesiones</h2>
+	
+	<ul> 
+		<li>Fecha: Solo puede poner fechas en el futuro.</li>
+		<li>Precio: Acepta valores con decimales (PONER "." Y NO ",").</li>
+		<li>Las opciones crear y modificar necesitan todos campos.</li>
+		<li>La opcion borrar solo necesita los campos Fecha y Sala.</li>
+		<li>Solo aparecen las sesiones que estan programadas para el futuro.</li>
+	</ul> 
 
 	<?php 
     

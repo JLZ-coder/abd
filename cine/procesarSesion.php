@@ -11,8 +11,7 @@ if (isset($_POST['procesar'])) {
     foreach($arr as $pair) {
         $keys[] = date("Y-m-d H:i",strtotime($pair['fecha'])).$pair['id_sala'];
     }
-    
-    $_POST['peli'] = 1;
+
     if (
         (!isset($_POST['fecha']) || trim($_POST['fecha']) == '')
         

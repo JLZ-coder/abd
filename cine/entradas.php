@@ -25,6 +25,13 @@
 	<a href="index.php"> ⇐Atras </a>
 	
 	<h2>Entradas</h2>
+	
+	<ul> 
+		<li>Solo aparecen las sesiones que estan programadas para el futuro.</li>
+		<li>Pulse en una de las opciones de vender o cancelar, segun la que eliga podra seleccionar asientos disponibles u ocupados.</li>
+		<li>Cada fila de asientos es de 20 columnas</li>
+		<li>Los asientos ocupados aparecen en rojo.</li>
+	</ul> 
 
 	<?php 
 	$arr = $ctrl->selectSesion('',"fecha > '".date("Y-m-d H:i:s", time())."'");

@@ -21,22 +21,34 @@
 	<a href="index.php"> ⇐Atras </a>
 	
 	<h2>Salas</h2>
-
+	
+	<ul> 
+		<li>ID: Solo acepta valores enteros.</li>
+		<li>Aforo: Solo acepta valores enteros.</li>
+		<li>Las opciones crear y modificar necesitan los dos campos.</li>
+		<li>La opcion borrar solo necesita el ID.</li>
+	</ul> 
+	
 	<?php 
     $arr = $ctrl->selectSala();
     
-    echo
-    '<table>
-     <tr> <th>ID</th> <th>Aforo</th> </tr>';
-    foreach ($arr as $valor)
-    {
+    if (count($arr) > 0) {
         echo
-        '<tr>
+        '<table>
+        <tr> <th>ID</th> <th>Aforo</th> </tr>';
+        foreach ($arr as $valor)
+        {
+            echo
+            '<tr>
 	    <td>'.$valor['id'].'</td>
 	    <td>'.$valor['aforo'].'</td>
 	    </tr>';
+        }
+        echo '</table>';
     }
-    echo '</table>';
+    else {
+        echo '<h3>No hay ninguna sala</h3>';
+    }
 
     ?>
 	
