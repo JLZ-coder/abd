@@ -25,7 +25,7 @@
 	<?php 
     
     echo '<ul>';
-    $arr = $ctrl->selectSesion('',"fecha > '".date("Y-m-d H:i:s", time())."' ORDER BY id_sala");
+    $arr = $ctrl->selectSesion('',"fecha > '".date("Y-m-d H:i:s", time())."' ORDER BY id_peli");
     
     if (count($arr) > 0) {
         $last_sala = $arr[0]['id_sala'];

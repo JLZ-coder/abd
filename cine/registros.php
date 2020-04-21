@@ -20,12 +20,12 @@
 	<h2>Registros</h2>
 	
 	<?php
-	$datos = $ctrl->selectRegistros();
+	$datos = $ctrl->selectAllRegistros();
 	
 	echo
 	'<table>
-     <tr> <td>id_registro</td> <td>id_sala</td> <td>asiento</td> <td>fecha_registro</td> <td>sesion</td> 
-          <td>id_peli</td> <td>precio</td> </tr>';
+     <tr> <th>ID</th> <th>Sala</th> <th>Asiento</th> <th>Fecha de Registro</th> <th>Fecha de Sesion</th> 
+          <th>ID Peli</th> <th>precio</th> </tr>';
 	foreach ($datos as $valor)
 	{
 	    echo
@@ -42,6 +42,17 @@
 	echo '</table>';
 	
 	?>
+	
+	<form action="procesarRegistro.php" method="post">
+		<fieldset>
+		<legend>Borrado de registros</legend>
+			Borrar registros anteriores a:<br> 
+            <input type="datetime-local" name="fecha" value=<?php echo substr(date("c", time()), 0, 14)."00";?>
+            max=<?php echo substr(date("c", time()), 0, 16);?>><br>
+  		</fieldset>
+  		
+        <input type="submit" name="procesar" value="Procesar">
+    </form>
 	
 </body>
 </html>

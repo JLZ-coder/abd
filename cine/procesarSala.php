@@ -56,7 +56,7 @@ if (isset($_POST['procesar'])) {
     }
     
     if (!isset($errores)) {
-        header("Location:salas.php".$str);
+        header("Location:salas.php");
     }
     else {
         echo '<h2>Problemas en el formulario</h2>';

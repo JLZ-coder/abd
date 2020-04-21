@@ -10,8 +10,10 @@ if (isset($_POST['vender']) || isset($_POST['cancelar'])) {
         foreach($_POST['asientos'] as $valor) {
             if (isset($_POST['vender'])) {
                 $ctrl->insertAsiento($_GET['fecha'], $_GET['sala'], $valor);
+                $ctrl->insertRegistro($_GET['fecha'], $_GET['sala'], $valor);
             }
             else {
+                $ctrl->deleteRegistro($_GET['fecha'], $_GET['sala'], $valor);
                 $ctrl->deleteAsiento($_GET['fecha'], $_GET['sala'], $valor);
             }
         }

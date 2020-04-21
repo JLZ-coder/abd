@@ -89,6 +89,11 @@ class controller{
         return $this->sesionDAO->delete($cond);
     }
     
+    public function deleteSesionBefore($fecha){
+        $cond = "fecha<"."'". $fecha . "'";
+        return $this->sesionDAO->delete($cond);
+    }
+    
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // FUNCIONES ASIENTO
     
@@ -112,15 +117,41 @@ class controller{
         $cond = "id=".$asiento. " AND " . "id_sala=" . $sala . " AND " . "fecha_sesion=" . "'". $fecha . "'";
         return $this->asientoDAO->delete($cond);
     }
+    
+    public function deleteAsientoBefore($fecha){
+        $cond = "fecha_sesion<"."'". $fecha . "'";
+        return $this->asientoDAO->delete($cond);
+    }
 
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // FUNCIONES REGISTRO
     
-    public function selectRegistros()
+    public function selectAllRegistros()
     {
-        return $this->registroDAO->select();
+        return $this->registroDAO->selectAll();
     }
+    
+    public function selectRegistros($col = "", $cond = ""){
+        return $this->registroDAO->select($col, $cond);
+    }
+    
+    public function insertRegistro($fecha, $sala, $asiento){
+        $col = "sesion, id_sala, asiento";
+        $values = "'". $fecha . "'" . "," . $sala . "," . $asiento;
+        return $this->registroDAO->insert($col, $values);
+    }
+    
+    public function deleteRegistro($fecha, $sala, $asiento){
+        $cond = "sesion="."'". $fecha . "'". " AND " . "id_sala=" . $sala . " AND " . "asiento=" . $asiento;
+        return $this->registroDAO->delete($cond);
+    }
+    
+    public function deleteRegistroBefore($fecha){
+        $cond = "sesion<"."'". $fecha . "'";
+        return $this->registroDAO->delete($cond);
+    }
+    
 
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
