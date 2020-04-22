@@ -34,7 +34,7 @@
 	</ul> 
 
 	<?php 
-	$arr = $ctrl->selectSesion('',"fecha > '".date("Y-m-d H:i:s", time())."'");
+	$arr = $ctrl->selectSesion('',"fecha > '".date("Y-m-d H:i:s", time())."' ORDER BY id_peli");
 	
 	if (count($arr) > 0) {
 	    $pelis_sesion= $ctrl->selectSesion('id_peli',"fecha > '".date("Y-m-d H:i:s", time())."' GROUP BY id_peli");

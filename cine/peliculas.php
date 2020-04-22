@@ -25,6 +25,7 @@
 		<li>Añadir película: no debe añadirse un nuevo id, simplemente proporcionar los datos nombre y descripción</li>
 		<li>Actualizar película: deben rellenarse los 3 campos</li>
 		<li>Borrar película: solamente se debe indicar el id de la película que se desea borrar</li>
+		<li>NO SE PUEDE MODIFICAR UNA PELICULA ASOCIADA A UNA SESION ACTIVA.</li>
 	</ul>
 	
 	<?php

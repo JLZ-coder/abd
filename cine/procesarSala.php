@@ -39,7 +39,13 @@ if (isset($_POST['procesar'])) {
         }
         else if ($_POST['op'] == "update"){
             if (in_array ( $_POST['id'], $keys )) {
-                $ctrl->updateSala($_POST['id'], $_POST['aforo']);
+                $arr_sesion = $ctrl->selectSesion('', "id_sala=".$_POST['id']." AND fecha>'".date("Y-m-d H:i:s", time())."'");
+                if (count($arr_sesion) > 0) {
+                    $errores[] = "La sala no se puede modificar: Existen sesiones asociadas a ella";
+                }
+                else {
+                    $ctrl->updateSala($_POST['id'], $_POST['aforo']);
+                }
             }
             else {
                 $errores[] = "El nombre de sala no existe";
@@ -47,7 +53,13 @@ if (isset($_POST['procesar'])) {
         }
         else {
             if (in_array ( $_POST['id'], $keys )) {
-                $ctrl->deleteSala($_POST['id']);
+                $arr_sesion = $ctrl->selectSesion('', "id_sala=".$_POST['id']." AND fecha>'".date("Y-m-d H:i:s", time())."'");
+                if (count($arr_sesion) > 0) {
+                    $errores[] = "La sala no se puede modificar: Existen sesiones asociadas a ella";
+                }
+                else {
+                    $ctrl->deleteSala($_POST['id']);
+                }
             }
             else {
                 $errores[] = "El nombre de sala no existe";

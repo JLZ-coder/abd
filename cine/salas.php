@@ -25,8 +25,10 @@
 	<ul> 
 		<li>ID: Solo acepta valores enteros.</li>
 		<li>Aforo: Solo acepta valores enteros.</li>
-		<li>Las opciones crear y modificar necesitan los dos campos.</li>
+		<li>La opcion crear necesita los dos campos.</li>
+		<li>La opcion editar necesita los dos campos, se cambiara el Aforo de la sala ID.</li>
 		<li>La opcion borrar solo necesita el ID.</li>
+		<li>NO SE PUEDE MODIFICAR UNA SALA ASOCIADA A UNA SESION ACTIVA.</li>
 	</ul> 
 	
 	<?php 

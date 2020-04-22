@@ -20,8 +20,9 @@
 	<h2>Registros</h2>
 	
 	<ul>
-		<li>Borrado de registros: debe escogerse una fecha del pasado</li>
+		<li>Borrado de registros: debe escogerse una fecha del pasado, no se pueden borrar registros para sesiones del futuro</li>
 		<li>Un registro es una entrada que ya ha sido comprada</li>
+		<li>Cancelar una entrada borrara su registro</li>
 	</ul>
 	
 	<?php
@@ -52,7 +53,7 @@
 		<fieldset>
 		<legend>Borrado de registros</legend>
 			Borrar registros anteriores a:<br> 
-            <input type="datetime-local" name="fecha" value=<?php echo substr(date("c", time()), 0, 14)."00";?>
+            <input type="datetime-local" name="fecha" value=<?php echo substr(date("c", time()), 0, 16);?>
             max=<?php echo substr(date("c", time()), 0, 16);?>><br>
   		</fieldset>
   		

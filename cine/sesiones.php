@@ -25,8 +25,9 @@
 	<ul> 
 		<li>Fecha: Solo puede poner fechas en el futuro.</li>
 		<li>Precio: Acepta valores con decimales (PONER "." Y NO ",").</li>
-		<li>Las opciones crear y modificar necesitan todos campos.</li>
-		<li>La opcion borrar solo necesita los campos Fecha y Sala.</li>
+		<li>La opcion crear necesita todos los campos.</li>
+		<li>La opcion editar necesita todos campos, se cambiara la Peli y Precio de la sesion asociada a una Fecha y Sala.</li>
+		<li>La opcion borrar solo necesita los campos Fecha y Sala, borrar una sesion cancelara todas las entradas y registros asociados.</li>
 		<li>Solo aparecen las sesiones que estan programadas para el futuro.</li>
 	</ul> 
 
@@ -37,42 +38,45 @@
     
     if (count($arr) > 0) {
         $last_sala = $arr[0]['id_sala'];
-    }
-    $i = 0;
-    $j = 0;
-    echo '<table>';
-    
-    while ($i < count($arr)) {
-        echo '<tr>';
+        $i = 0;
+        $j = 0;
+        echo '<table>';
         
-    	    echo '<th>';
-                echo '<h3>'."Sala ".$arr[$i]['id_sala'] . '</h3>';
+        while ($i < count($arr)) {
+            echo '<tr>';
+            
+            echo '<th>';
+            echo '<h3>'."Sala ".$arr[$i]['id_sala'] . '</h3>';
             echo '</th>';
-    
+            
             echo '<td>';
-                echo
-                '<table>
+            echo
+            '<table>
                 <tr> <th>Fecha</th> <th>Pelicula</th> <th>Precio</th> </tr>';
-                while ($j < count($arr) && $last_sala == $arr[$j]['id_sala']) {
-             
-                    echo
-                    '<tr>
+            while ($j < count($arr) && $last_sala == $arr[$j]['id_sala']) {
+                
+                echo
+                '<tr>
             	    <td>'.$arr[$j]['fecha'].'</td>
             	    <td>'.$arr[$j]['id_peli'].'</td>
                     <td>'.$arr[$j]['precio'].'</td>
             	    </tr>';
-                    
-                    $last_sala = $arr[$j]['id_sala'];
-                    $j++;
-                }
-                if ($j < count($arr)) $last_sala = $arr[$j]['id_sala'];
-                echo '</table>';
                 
+                $last_sala = $arr[$j]['id_sala'];
+                $j++;
+            }
+            if ($j < count($arr)) $last_sala = $arr[$j]['id_sala'];
+            echo '</table>';
+            
             echo '</td>';
             
-        echo '</tr>';
-        
-        $i=$j;
+            echo '</tr>';
+            
+            $i=$j;
+        }
+    }
+    else {
+        echo '<h3>No hay ninguna sesion</h3>';
     }
     
     echo '</table>';
@@ -82,7 +86,7 @@
 		<fieldset>
 		<legend>Modificación de sesiones</legend>
             Fecha:<br> 
-            <input type="datetime-local" name="fecha" value=<?php echo substr(date("c", time()), 0, 14)."00";?>
+            <input type="datetime-local" name="fecha" value=<?php echo substr(date("c", time()), 0, 16);?>
             min=<?php echo substr(date("c", time()), 0, 16);?>><br>
             Sala:<br> 
             <select name="sala">

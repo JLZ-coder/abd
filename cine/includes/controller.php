@@ -118,6 +118,11 @@ class controller{
         return $this->asientoDAO->delete($cond);
     }
     
+    public function deleteAsientos($fecha, $sala){
+        $cond = "id_sala=" . $sala . " AND " . "fecha_sesion=" . "'". $fecha . "'";
+        return $this->asientoDAO->delete($cond);
+    }
+    
     public function deleteAsientoBefore($fecha){
         $cond = "fecha_sesion<"."'". $fecha . "'";
         return $this->asientoDAO->delete($cond);
@@ -157,9 +162,8 @@ class controller{
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // FUNCIONES PELICULA
 
-    public function selectPeliculas()
-    {
-        return $this->peliculaDAO->select();
+    public function selectPeliculas($col = "", $cond = ""){
+        return $this->peliculaDAO->select($col, $cond);
     }
     
     public function insertPelicula($nombre, $descripcion)

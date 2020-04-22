@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-04-2020 a las 01:40:59
+-- Tiempo de generación: 22-04-2020 a las 13:58:56
 -- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.2
+-- Versión de PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -39,9 +39,10 @@ CREATE TABLE `asientos` (
 --
 
 INSERT INTO `asientos` (`id`, `id_sala`, `fecha_sesion`) VALUES
-(1, 1, '2020-04-22 01:00:00'),
-(1, 2, '2020-04-22 01:00:00'),
-(2, 2, '2020-04-23 01:26:44');
+(25, 1, '2020-04-27 20:30:00'),
+(43, 1, '2020-04-27 20:30:00'),
+(44, 1, '2020-04-27 20:30:00'),
+(63, 1, '2020-04-27 20:30:00');
 
 -- --------------------------------------------------------
 
@@ -60,8 +61,9 @@ CREATE TABLE `pelicula` (
 --
 
 INSERT INTO `pelicula` (`id`, `nombre`, `descripcion`) VALUES
-(1, 'Matrix', 'Un clasicazo pero no en mayusculas.'),
-(2, 'Cuatri 2, el suspenso', 'Es inevitable.');
+(3, 'The Fast & The Furious', 'Un policía encubierto se infiltra en una banda de carreras callejeras de Los Ángeles mientras investiga robos de automóviles.'),
+(4, 'Parasite', 'Tanto Gi Taek como su familia están sin trabajo. Cuando su hijo mayor, Gi Woo, empieza a impartir clases particulares en la adinerada casa de los Park, las dos familias, que tienen mucho en común pese a pertenecer a dos mundos totalmente distintos, entablan una relación de resultados imprevisibles.'),
+(5, 'Back to the Future', 'Una máquina del tiempo transporta a un adolescente a los años 50, cuando sus padres todavía estudiaban en la secundaria.');
 
 -- --------------------------------------------------------
 
@@ -82,8 +84,10 @@ CREATE TABLE `registro` (
 --
 
 INSERT INTO `registro` (`id`, `sesion`, `id_sala`, `asiento`, `fecha`) VALUES
-(1, '2020-04-22 01:00:00', 1, 1, '2020-04-21 23:29:02'),
-(9, '2020-04-23 01:26:44', 1, 2, '2020-04-21 23:29:02');
+(17, '2020-04-27 20:30:00', 1, 25, '2020-04-22 11:57:50'),
+(18, '2020-04-27 20:30:00', 1, 43, '2020-04-22 11:57:50'),
+(19, '2020-04-27 20:30:00', 1, 44, '2020-04-22 11:57:50'),
+(20, '2020-04-27 20:30:00', 1, 63, '2020-04-22 11:57:50');
 
 -- --------------------------------------------------------
 
@@ -101,11 +105,9 @@ CREATE TABLE `sala` (
 --
 
 INSERT INTO `sala` (`id`, `aforo`) VALUES
-(1, 25),
-(2, 100),
-(3, 500),
-(4, 1),
-(5, 3);
+(1, 200),
+(2, 300),
+(3, 200);
 
 -- --------------------------------------------------------
 
@@ -125,9 +127,11 @@ CREATE TABLE `sesion` (
 --
 
 INSERT INTO `sesion` (`fecha`, `id_sala`, `id_peli`, `precio`) VALUES
-('0000-00-00 00:00:00', 2, 2, 7.8),
-('2020-04-22 01:00:00', 1, 1, 9.5),
-('2020-04-23 01:26:44', 4, 1, 9.9);
+('2020-04-27 20:00:00', 2, 4, 10),
+('2020-04-27 20:30:00', 1, 3, 9),
+('2020-04-27 22:00:00', 1, 3, 9),
+('2020-04-27 22:30:00', 2, 4, 10),
+('2020-04-27 23:30:00', 1, 3, 9);
 
 --
 -- Índices para tablas volcadas
@@ -178,13 +182,13 @@ ALTER TABLE `sesion`
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `registro`
 --
 ALTER TABLE `registro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restricciones para tablas volcadas
@@ -194,22 +198,14 @@ ALTER TABLE `registro`
 -- Filtros para la tabla `asientos`
 --
 ALTER TABLE `asientos`
-  ADD CONSTRAINT `asientos_ibfk_1` FOREIGN KEY (`fecha_sesion`) REFERENCES `sesion` (`fecha`) ON DELETE CASCADE;
-
---
--- Filtros para la tabla `registro`
---
-ALTER TABLE `registro`
-  ADD CONSTRAINT `registro_ibfk_2` FOREIGN KEY (`id_sala`) REFERENCES `asientos` (`id_sala`) ON DELETE CASCADE,
-  ADD CONSTRAINT `registro_ibfk_3` FOREIGN KEY (`asiento`) REFERENCES `asientos` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `registro_ibfk_4` FOREIGN KEY (`sesion`) REFERENCES `asientos` (`fecha_sesion`) ON DELETE CASCADE;
+  ADD CONSTRAINT `asientos_ibfk_1` FOREIGN KEY (`fecha_sesion`) REFERENCES `sesion` (`fecha`);
 
 --
 -- Filtros para la tabla `sesion`
 --
 ALTER TABLE `sesion`
-  ADD CONSTRAINT `sesion_ibfk_2` FOREIGN KEY (`id_peli`) REFERENCES `pelicula` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `sesion_ibfk_3` FOREIGN KEY (`id_sala`) REFERENCES `sala` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `sesion_ibfk_2` FOREIGN KEY (`id_peli`) REFERENCES `pelicula` (`id`),
+  ADD CONSTRAINT `sesion_ibfk_3` FOREIGN KEY (`id_sala`) REFERENCES `sala` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

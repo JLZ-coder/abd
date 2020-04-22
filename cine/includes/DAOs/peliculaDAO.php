@@ -8,9 +8,17 @@ class peliculaDAo extends DAO
         parent::__construct();
     }
     
-    public function select()
-    {
-        $query = "SELECT * from pelicula";
+    public function select($col, $cond){
+        $query = "";
+        if ($col == "") {
+            $col = "*";
+        }
+        if ($cond == "") {
+            $query = "SELECT ".$col." FROM pelicula";
+        }
+        else {
+            $query = "SELECT ".$col." FROM pelicula WHERE ".$cond;
+        }
         
         return $this->consultar($query);
     }

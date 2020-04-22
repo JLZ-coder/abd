@@ -66,6 +66,9 @@
             {
                 $errores[] = "Escoge un id existente";
             }
+            elseif (count($ctrl->selectSesion('', "id_peli=".$_POST['id']." AND fecha>'".date("Y-m-d H:i:s", time())."'")) > 0) {
+                $errores[] = "La pelicula no se puede modificar: Existen sesiones asociadas a ella";
+            }
             
             if(count($errores) === 0)
             {
@@ -84,6 +87,10 @@
             {
                 $errores[] = "Escoge un id existente";
             }
+            elseif (count($ctrl->selectSesion('', "id_peli=".$_POST['id']." AND fecha>'".date("Y-m-d H:i:s", time())."'")) > 0) {
+                $errores[] = "La pelicula no se puede modificar: Existen sesiones asociadas a ella";
+            }
+            
             
             if(count($errores) === 0)
             {
