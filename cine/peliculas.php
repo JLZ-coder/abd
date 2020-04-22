@@ -1,6 +1,7 @@
 <?php 
 	require_once 'includes/config.php';
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,12 +20,19 @@
 	<a href="index.php"> ⇐Atras </a>
 	<h2>Películas</h2>
 	
+	<ul>
+		<li>id: deben introducirse valores enteros positivos</li>
+		<li>Añadir película: no debe añadirse un nuevo id, simplemente proporcionar los datos nombre y descripción</li>
+		<li>Actualizar película: deben rellenarse los 3 campos</li>
+		<li>Borrar película: solamente se debe indicar el id de la película que se desea borrar</li>
+	</ul>
+	
 	<?php
 	
     $datosIni = $ctrl->selectPeliculas();
     
     echo '<p><table>
-      <tr> <td>id</td> <td>nombre</td> <td>descripcion</td> </tr>';
+      <tr> <th>id</th> <th>nombre</th> <th>descripcion</th> </tr>';
     foreach ($datosIni as $valor)
     {
         echo
@@ -49,9 +57,9 @@
 		<p><textarea name='descripcion' cols='40' rows='5'></textarea></p>
 		
 		<p>Opciones:
-		<p><input type='radio' name='op' value='insert' checked='checked'>Añadir pelicula</p>
-		<p><input type='radio' name='op' value='update'>Actualizar pelicula</p>
-		<p><input type='radio' name='op' value='delete'>Borrar pelicula</p>
+		<p><input type='radio' name='op' value='insert' checked='checked'>Añadir película</p>
+		<p><input type='radio' name='op' value='update'>Actualizar película</p>
+		<p><input type='radio' name='op' value='delete'>Borrar película</p>
 		</fieldset>
 		
 		<input type='submit' name='enviar' value='Enviar'>

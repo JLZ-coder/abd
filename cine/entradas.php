@@ -8,7 +8,7 @@
 	<style>
 	table { border: 1px solid black;
 	        border-collapse: collapse;
-	        min-width: 250px; }
+	        min-width: 600px; }
     td { border: 1px solid black; }
     strong {
         color: red;

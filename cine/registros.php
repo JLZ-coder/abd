@@ -19,6 +19,11 @@
 	<a href="index.php"> ⇐Atras </a>
 	<h2>Registros</h2>
 	
+	<ul>
+		<li>Borrado de registros: debe escogerse una fecha del pasado</li>
+		<li>Un registro es una entrada que ya ha sido comprada</li>
+	</ul>
+	
 	<?php
 	$datos = $ctrl->selectAllRegistros();
 	

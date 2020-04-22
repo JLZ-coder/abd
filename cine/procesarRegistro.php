@@ -15,9 +15,10 @@ if (isset($_POST['procesar'])) {
           
     if (!isset($errores)) {
         
+        $ctrl->deleteRegistroBefore($_POST['fecha']);
         $ctrl->deleteAsientoBefore($_POST['fecha']);
         $ctrl->deleteSesionBefore($_POST['fecha']);
-        $ctrl->deleteRegistroBefore($_POST['fecha']);
+        
         header("Location:registros.php");
     }
     else {
