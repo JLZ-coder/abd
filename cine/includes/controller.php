@@ -3,7 +3,6 @@
 require_once(__DIR__ . '/DAOs/salaDAO.php');
 require_once(__DIR__ . '/DAOs/asientoDAO.php');
 require_once(__DIR__ . '/DAOs/peliculaDAO.php');
-require_once(__DIR__ . '/DAOs/registroDAO.php');
 require_once(__DIR__ . '/DAOs/sesionesDAO.php');
 
 class controller{
@@ -20,18 +19,9 @@ class controller{
         $this->salaDAO = new salaDAO();
         $this->asientoDAO = new asientoDAO();
         $this->peliculaDAO = new peliculaDAO();
-        $this->registroDAO = new registroDAO();
+        
         $this->sesionDAO = new sesionesDAO();
     }
-    
-    /* 
-     * sala         asientos     pelicula        sesion      registro
-     *  id           id_sala      id(auto)        fecha       id
-     *  aforo        id           nombre          id_sala     sesion
-     *               fecha_sesion descripcion     id_peli     id_sala
-     *                                            id_precio   asiento
-     *                                                        fecha
-     * */
 
      public static function getInstance() {
         if (null === self::$instance) {
@@ -80,6 +70,18 @@ class controller{
     
     public function updateSesion($fecha, $sala, $peli, $precio){
         $set = "id_peli =".$peli . "," . "precio=" . $precio;
+        $cond = "fecha="."'".$fecha."'" . " AND " . "id_sala=" . $sala;
+        return $this->sesionDAO->update($set, $cond);
+    }
+    
+    public function ventaSesion($fecha, $sala){
+        $set = "total_venta=total_venta + 1";
+        $cond = "fecha="."'".$fecha."'" . " AND " . "id_sala=" . $sala;
+        return $this->sesionDAO->update($set, $cond);
+    }
+    
+    public function cancelaSesion($fecha, $sala){
+        $set = "cancelado=cancelado + 1";
         $cond = "fecha="."'".$fecha."'" . " AND " . "id_sala=" . $sala;
         return $this->sesionDAO->update($set, $cond);
     }

@@ -72,10 +72,14 @@
 	        
 	        $aforo_sala = $ctrl->selectSala('aforo', "id=".$_GET['sala']);
 	        $no_disponibles = $ctrl->selectAsiento('', "fecha_sesion='".$_GET['fecha']."' AND id_sala=".$_GET['sala']);
+	        $disponibles = $aforo_sala[0]['aforo'] - count($no_disponibles);
 	        $no_disp = array();
 	        foreach ($no_disponibles as $valor) {
 	            $no_disp[] = $valor['id'];
 	        }
+	        
+	        echo '<h5>Asientos ocupados: '.count($no_disponibles)."</h5>";
+	        echo '<h5>Asientos disponibles: '.$disponibles."</h5>";
 	        
 	        if ($_GET['vender'] == 1) {
 	            
