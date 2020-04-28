@@ -28,7 +28,7 @@
 	
 	<?php
 	$max = Date('Y-m-d', strtotime('+3 days'));
-	$arr = $ctrl->selectSesion('', "fecha > '".date("Y-m-d", time())."' AND fecha < '".date("Y-m-d", time())."' ORDER BY fecha");
+	$arr = $ctrl->selectSesion('', "fecha > '".date("Y-m-d", time())."' AND fecha < '".$max."' ORDER BY fecha");
 
 	echo '<h3>Proximas sesiones</h3>';
 	
