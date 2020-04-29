@@ -1,0 +1,4 @@
+servidor       : localhost
+nombre usuario : root
+(no hay contraseña)
+nombre BD      : cine_php
