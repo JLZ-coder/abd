@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-04-2020 a las 18:21:16
+-- Tiempo de generación: 30-04-2020 a las 11:02:43
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.3
 
@@ -30,9 +30,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `asientos` (
   `id` int(11) NOT NULL,
-  `id_sala` int(11) NOT NULL,
   `fecha_sesion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `asientos`
+--
+
+INSERT INTO `asientos` (`id`, `fecha_sesion`) VALUES
+(0, '2020-04-30 20:41:00'),
+(1, '2020-04-30 20:41:00'),
+(2, '2020-04-30 20:41:00');
 
 -- --------------------------------------------------------
 
@@ -91,6 +99,14 @@ CREATE TABLE `sesion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Volcado de datos para la tabla `sesion`
+--
+
+INSERT INTO `sesion` (`fecha`, `id_sala`, `id_peli`, `precio`, `total_venta`, `cancelado`) VALUES
+('2020-04-29 20:41:00', 1, 3, 5, 0, 0),
+('2020-04-30 20:41:00', 1, 3, 5.5, 8, 5);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -98,9 +114,10 @@ CREATE TABLE `sesion` (
 -- Indices de la tabla `asientos`
 --
 ALTER TABLE `asientos`
-  ADD PRIMARY KEY (`id_sala`,`id`,`fecha_sesion`) USING BTREE,
+  ADD PRIMARY KEY (`id`,`fecha_sesion`) USING BTREE,
   ADD KEY `id` (`id`),
-  ADD KEY `fecha_sesion` (`fecha_sesion`);
+  ADD KEY `fecha_sesion` (`fecha_sesion`),
+  ADD KEY `id_2` (`id`);
 
 --
 -- Indices de la tabla `pelicula`
