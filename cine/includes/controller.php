@@ -101,20 +101,20 @@ class controller{
         return $this->asientoDAO->select($col, $cond);
     }
     
-    public function insertAsiento($fecha, $asiento){
-        $col = "id, fecha_sesion";
-        $values = $asiento . "," . "'". $fecha . "'";
+    public function insertAsiento($fecha, $sala, $asiento){
+        $col = "id, fecha_sesion, sala_sesion";
+        $values = $asiento . "," . "'". $fecha . "',".$sala;
         return $this->asientoDAO->insert($col, $values);
     }
     
-    public function updateAsiento($fecha, $asiento_ant, $asiento_post){
+    public function updateAsiento($fecha, $sala, $asiento_ant, $asiento_post){
         $set = "id =".$asiento_post . ", fecha_sesion=" . "'". $fecha . "'";
-        $cond = "id="."'".$asiento_ant."'" . " AND " . "fecha=" . "'". $fecha . "'";
+        $cond = "id="."'".$asiento_ant."'" . " AND " . "fecha=" . "'". $fecha . "' AND sala_sesion=".$sala;
         return $this->asientoDAO->update($set, $cond);
     }
     
-    public function deleteAsiento($fecha, $asiento){
-        $cond = "id=".$asiento. " AND " . "fecha_sesion=" . "'". $fecha . "'";
+    public function deleteAsiento($fecha, $sala, $asiento){
+        $cond = "id=".$asiento. " AND " . "fecha_sesion=" . "'". $fecha . "' AND sala_sesion=".$sala;
         return $this->asientoDAO->delete($cond);
     }
     

@@ -9,12 +9,12 @@ if (isset($_POST['vender']) || isset($_POST['cancelar'])) {
     if (count($aux) > 0) {
         foreach($_POST['asientos'] as $valor) {
             if (isset($_POST['vender'])) {
-                $ctrl->insertAsiento($_GET['fecha'], $valor);
+                $ctrl->insertAsiento($_GET['fecha'], $_GET['sala'], $valor);
                 $ctrl->ventaSesion($_GET['fecha'], $_GET['sala']);
             }
             else {
                 $ctrl->cancelaSesion($_GET['fecha'], $_GET['sala']);
-                $ctrl->deleteAsiento($_GET['fecha'], $valor);
+                $ctrl->deleteAsiento($_GET['fecha'], $_GET['sala'], $valor);
             }
         }
     }

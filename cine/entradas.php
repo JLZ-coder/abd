@@ -71,7 +71,7 @@
 	        echo '<h2>Sesion: '.$_GET['fecha'].' para la Pelicula: '.$_GET['peli'].' en Sala: '.$_GET['sala'].'</h2>';
 	        
 	        $aforo_sala = $ctrl->selectSala('aforo', "id=".$_GET['sala']);
-	        $no_disponibles = $ctrl->selectAsiento('', "fecha_sesion='".$_GET['fecha']."'");
+	        $no_disponibles = $ctrl->selectAsiento('', "fecha_sesion='".$_GET['fecha']."' AND sala_sesion=".$_GET['sala']);
 	        $disponibles = $aforo_sala[0]['aforo'] - count($no_disponibles);
 	        $no_disp = array();
 	        foreach ($no_disponibles as $valor) {
