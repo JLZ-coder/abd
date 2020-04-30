@@ -53,8 +53,7 @@ if (isset($_POST['procesar'])) {
             if (in_array ( $_POST['fecha'].$_POST['sala'], $keys  )) {
                 $arr_asientos = $ctrl->selectAsiento('', "fecha_sesion='".$_POST['fecha']."' AND id_sala=".$_POST['sala']);
                 foreach ($arr_asientos as $valor) {
-                    $ctrl->deleteRegistro($valor['fecha_sesion'], $valor['id_sala'], $valor['id']);
-                    $ctrl->deleteAsiento($valor['fecha_sesion'], $valor['id_sala'], $valor['id']);
+                    $ctrl->deleteAsiento($valor['fecha_sesion'], $valor['id']);
                 }
                 $ctrl->deleteSesion($_POST['fecha'], $_POST['sala']);
             }

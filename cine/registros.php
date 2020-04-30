@@ -48,7 +48,7 @@
 	        echo '<td>';
 	        echo
 	        '<table>
-                <tr> <th>Fecha</th> <th>Id_pelicula</th> <th>Precio</th> <th>Total Ventas</th> <th>Cancelaciones</th> <th>Ganacias(bruto)</th> </tr>';
+                <tr> <th>Fecha</th> <th>Sala</th> <th>Id_pelicula</th> <th>Precio</th> <th>Total Ventas</th> <th>Cancelaciones</th> <th>Ganacias(bruto)</th> </tr>';
 	        while ($j < count($arr) && $last == $arr[$j]['fecha']) {
 	            
 	            $gan=($arr[$j]['total_venta'] - $arr[$j]['cancelado']) * $arr[$j]['precio'];
@@ -56,6 +56,7 @@
 	            echo
 	            '<tr>
             	    <td>'.$arr[$j]['fecha'].'</td>
+                    <td>'.$arr[$j]['id_sala'].'</td>
             	    <td>'.$arr[$j]['id_peli'].'</td>
                     <td>'.$arr[$j]['precio'].'</td>
                     <td>'.$arr[$j]['total_venta'].'</td>

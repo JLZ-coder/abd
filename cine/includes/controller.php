@@ -10,7 +10,6 @@ class controller{
     private $salaDAO;
     private $asientoDAO;
     private $peliculaDAO;
-    private $registroDAO;
     private $sesionDAO;
    
     private static $instance = null;
@@ -19,7 +18,6 @@ class controller{
         $this->salaDAO = new salaDAO();
         $this->asientoDAO = new asientoDAO();
         $this->peliculaDAO = new peliculaDAO();
-        
         $this->sesionDAO = new sesionesDAO();
     }
 
@@ -103,20 +101,20 @@ class controller{
         return $this->asientoDAO->select($col, $cond);
     }
     
-    public function insertAsiento($fecha, $sala, $asiento){
-        $col = "id, id_sala, fecha_sesion";
-        $values = $asiento . "," . $sala . "," .  "'". $fecha . "'";
+    public function insertAsiento($fecha, $asiento){
+        $col = "id, fecha_sesion";
+        $values = $asiento . "," . "'". $fecha . "'";
         return $this->asientoDAO->insert($col, $values);
     }
     
-    public function updateAsiento($fecha, $sala, $asiento_ant, $asiento_post){
-        $set = "id =".$asiento_ant . "," . "id_sala=" . $sala . "fecha_sesion=" . "'". $fecha . "'";
-        $cond = "id="."'".$asiento_post."'" . " AND " . "id_sala=" . $sala . " AND " . "fecha=" . "'". $fecha . "'";
+    public function updateAsiento($fecha, $asiento_ant, $asiento_post){
+        $set = "id =".$asiento_post . ", fecha_sesion=" . "'". $fecha . "'";
+        $cond = "id="."'".$asiento_ant."'" . " AND " . "fecha=" . "'". $fecha . "'";
         return $this->asientoDAO->update($set, $cond);
     }
     
-    public function deleteAsiento($fecha, $sala, $asiento){
-        $cond = "id=".$asiento. " AND " . "id_sala=" . $sala . " AND " . "fecha_sesion=" . "'". $fecha . "'";
+    public function deleteAsiento($fecha, $asiento){
+        $cond = "id=".$asiento. " AND " . "fecha_sesion=" . "'". $fecha . "'";
         return $this->asientoDAO->delete($cond);
     }
     
@@ -129,36 +127,6 @@ class controller{
         $cond = "fecha_sesion<"."'". $fecha . "'";
         return $this->asientoDAO->delete($cond);
     }
-
-
-    // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    // FUNCIONES REGISTRO
-    
-    public function selectAllRegistros()
-    {
-        return $this->registroDAO->selectAll();
-    }
-    
-    public function selectRegistros($col = "", $cond = ""){
-        return $this->registroDAO->select($col, $cond);
-    }
-    
-    public function insertRegistro($fecha, $sala, $asiento){
-        $col = "sesion, id_sala, asiento";
-        $values = "'". $fecha . "'" . "," . $sala . "," . $asiento;
-        return $this->registroDAO->insert($col, $values);
-    }
-    
-    public function deleteRegistro($fecha, $sala, $asiento){
-        $cond = "sesion="."'". $fecha . "'". " AND " . "id_sala=" . $sala . " AND " . "asiento=" . $asiento;
-        return $this->registroDAO->delete($cond);
-    }
-    
-    public function deleteRegistroBefore($fecha){
-        $cond = "sesion<"."'". $fecha . "'";
-        return $this->registroDAO->delete($cond);
-    }
-    
 
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
