@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-04-2020 a las 19:53:56
+-- Tiempo de generación: 01-05-2020 a las 22:04:51
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.3
 
@@ -33,6 +33,17 @@ CREATE TABLE `asientos` (
   `fecha_sesion` datetime NOT NULL,
   `sala_sesion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `asientos`
+--
+
+INSERT INTO `asientos` (`id`, `fecha_sesion`, `sala_sesion`) VALUES
+(1, '2020-05-30 22:02:00', 2),
+(2, '2020-05-30 22:02:00', 2),
+(20, '2020-05-30 22:02:00', 1),
+(21, '2020-05-30 22:02:00', 1),
+(22, '2020-05-30 22:02:00', 1);
 
 -- --------------------------------------------------------
 
@@ -95,8 +106,8 @@ CREATE TABLE `sesion` (
 --
 
 INSERT INTO `sesion` (`fecha`, `id_sala`, `id_peli`, `precio`, `total_venta`, `cancelado`) VALUES
-('2020-04-29 20:41:00', 1, 3, 5, 0, 0),
-('2020-04-30 20:41:00', 1, 3, 5.5, 10, 10);
+('2020-05-30 22:02:00', 1, 3, 7, 3, 0),
+('2020-05-30 22:02:00', 2, 5, 7, 3, 1);
 
 --
 -- Índices para tablas volcadas
@@ -108,8 +119,8 @@ INSERT INTO `sesion` (`fecha`, `id_sala`, `id_peli`, `precio`, `total_venta`, `c
 ALTER TABLE `asientos`
   ADD PRIMARY KEY (`id`,`fecha_sesion`,`sala_sesion`) USING BTREE,
   ADD KEY `id` (`id`),
-  ADD KEY `fecha_sesion` (`fecha_sesion`),
-  ADD KEY `id_sala` (`sala_sesion`);
+  ADD KEY `id_sala` (`sala_sesion`),
+  ADD KEY `fecha_sesion` (`fecha_sesion`);
 
 --
 -- Indices de la tabla `pelicula`
@@ -149,8 +160,8 @@ ALTER TABLE `pelicula`
 -- Filtros para la tabla `asientos`
 --
 ALTER TABLE `asientos`
-  ADD CONSTRAINT `asientos_ibfk_1` FOREIGN KEY (`fecha_sesion`) REFERENCES `sesion` (`fecha`),
-  ADD CONSTRAINT `asientos_ibfk_2` FOREIGN KEY (`sala_sesion`) REFERENCES `sesion` (`id_sala`);
+  ADD CONSTRAINT `asientos_ibfk_1` FOREIGN KEY (`fecha_sesion`) REFERENCES `sesion` (`fecha`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `asientos_ibfk_2` FOREIGN KEY (`sala_sesion`) REFERENCES `sesion` (`id_sala`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `sesion`

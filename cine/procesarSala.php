@@ -21,8 +21,8 @@ if (isset($_POST['procesar'])) {
         }
     if (
         ($_POST['op'] == "insert" || $_POST['op'] == "update") && (!isset($_POST['aforo']) || trim($_POST['aforo']) == '')
-        ||
-        !ctype_digit($_POST['id'])
+        &&
+        !ctype_digit($_POST['aforo'])
         ) {
             
             $errores[] = "Campo aforo incorrecto";
